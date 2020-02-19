@@ -4,6 +4,7 @@ import all.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -26,15 +27,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
     }
 
     @Override
-    public boolean isUser(Long id) {
+    public boolean isUserExist(Long id) {
         Session session = factory.openSession();
         session.beginTransaction();
         User user = session.get(User.class,id);
@@ -48,21 +52,27 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        session.update(user);
-        session.getTransaction().commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.update(user);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
     }
 
     @Override
     public void deleteUser(Long id) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        User user = session.get(User.class,id);
-        session.delete(user);
-        session.getTransaction().commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            User user = session.get(User.class, id);
+            session.delete(user);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
 
     }
 

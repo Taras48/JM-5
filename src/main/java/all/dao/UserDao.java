@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserDao {
     public List<User> getAllUsers();
     public void addUser(User user);
-    public boolean isUser(Long id);
+    public boolean isUserExist(Long id);
     public void updateUser(User user);
     public void deleteUser(Long id);
     public User getUser(Long id);

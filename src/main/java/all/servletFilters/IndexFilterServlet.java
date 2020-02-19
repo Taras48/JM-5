@@ -12,6 +12,9 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/index")
 public class IndexFilterServlet implements Filter {
+
+    private UserServiceImpl userService = UserServiceImpl.getInstance();
+
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -22,7 +25,6 @@ public class IndexFilterServlet implements Filter {
         if (servletRequest.getParameter("password") == null) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            UserServiceImpl userService = UserServiceImpl.getInstance();
             String name = servletRequest.getParameter("name");
             Long password = Long.parseLong(servletRequest.getParameter("password"));
             User user = userService.getUser(name, password);

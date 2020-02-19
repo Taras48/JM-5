@@ -13,10 +13,10 @@ import java.util.List;
 
 @WebServlet("/admin")
 public class AdminServlet extends HttpServlet {
+    private UserServiceImpl userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserServiceImpl userService = UserServiceImpl.getInstance();
         List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
         req.getRequestDispatcher("adminIndex.jsp").forward(req, resp);

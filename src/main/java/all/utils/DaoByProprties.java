@@ -1,4 +1,4 @@
-package all.dao;
+package all.utils;
 
 import all.dao.factorys.DaoFactory;
 import all.dao.factorys.DaoHibernateFactory;
@@ -14,7 +14,6 @@ public class DaoByProprties {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream fileReader = classLoader.getResourceAsStream("db.properties");
-            properties = new Properties();
             properties.load(fileReader);
         } catch (IOException e) {
             e.printStackTrace();

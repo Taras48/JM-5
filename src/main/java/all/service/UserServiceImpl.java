@@ -3,7 +3,7 @@ package all.service;
 import all.dao.*;
 import all.dao.factorys.DaoFactory;
 import all.model.User;
-import all.dao.DaoByProprties;
+import all.utils.DaoByProprties;
 
 import java.util.List;
 
@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUser(Long id) {
-        return connect.isUser(id);
+    public boolean isUserExist(Long id) {
+        return connect.isUserExist(id);
     }
 
     @Override

@@ -8,7 +8,7 @@ public interface UserService {
     public void addUser(User user);
     public List<User> getAllUsers();
     public void updateUser(User user);
-    public boolean isUser(Long id);
+    public boolean isUserExist(Long id);
     public void deleteUser(Long id);
     public  User getUser(String name, Long password);
 }

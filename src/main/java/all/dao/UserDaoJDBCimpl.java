@@ -18,15 +18,19 @@ public class UserDaoJDBCimpl implements UserDao {
     public void addUser(User user) {
         createTable();
         String sql = "insert user(name, mail, role, password) values (?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getMail());
             ps.setString(3, user.getRole());
             ps.setString(4, user.getPassword().toString());
             ps.executeUpdate();
-            ps.close();
+            connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             System.out.println("user not add");
         }
     }
@@ -51,7 +55,7 @@ public class UserDaoJDBCimpl implements UserDao {
     }
 
     @Override
-    public boolean isUser(Long id) {
+    public boolean isUserExist(Long id) {
         String sql = "select * from user where id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -70,7 +74,7 @@ public class UserDaoJDBCimpl implements UserDao {
     @Override
     public User getUser(Long id) {
         String sql = "select * from user where id = ?";
-         User user = null;
+        User user = null;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setLong(1, id);
@@ -105,28 +109,39 @@ public class UserDaoJDBCimpl implements UserDao {
     @Override
     public void updateUser(User user) {
         String update = "update user set name = ?,mail = ?, role = ?, password = ? where id = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(update);
+        try (PreparedStatement ps = connection.prepareStatement(update)) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getMail());
             ps.setString(3, user.getRole());
             ps.setString(4, user.getPassword().toString());
             ps.setLong(5, user.getId());
             ps.executeUpdate();
-            ps.close();
+            connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             System.out.println("user not update1");
         }
+
     }
 
     @Override
     public void deleteUser(Long id) {
-        String sql = "delete from user where id=?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "delete from user where id = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setLong(1, id);
             st.executeUpdate();
+            connection.commit();
+
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             System.out.println("erorr delet user");
         }
     }

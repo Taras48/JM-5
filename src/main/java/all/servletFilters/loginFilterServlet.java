@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/index")
-public class IndexFilterServlet implements Filter {
+@WebFilter(urlPatterns = "/login")
+public class loginFilterServlet implements Filter {
 
     private UserServiceImpl userService = UserServiceImpl.getInstance();
 

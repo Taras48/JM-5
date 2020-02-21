@@ -29,6 +29,13 @@
                 <td><c:out value="${user.getMail()}"/></td>
                 <td><c:out value="${user.getRole()}"/></td>
                 <td><c:out value="${user.getPassword()}"/></td>
+                <td>
+                    <a href="/admin/update?id=<c:out value='${user.getId()}' />&name=<c:out value='${user.getName()}'/>
+                    &mail=<c:out value='${user.getMail()}' />&role=<c:out value='${user.getRole()}'/>
+                     &password=<c:out value='${user.getPassword()}'/>">Update</a>
+                    |
+                    <a href="/admin/del?id=<c:out value='${user.getId()}' />">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

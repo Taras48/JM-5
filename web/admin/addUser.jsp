@@ -13,13 +13,17 @@
 <body>
 <p><a href="/admin/update">Update User</a> |
     <a href="/admin/del">Delete User</a>|
-<a href="/user"> User</a></p>
+    <a href="/user"> User</a></p>
 <h3>User Add</h3>
 
-<form method="post"  action="/admin/add">
+<form method="post" action="/admin/add">
     <p>Name: <input type="text" name="name"> Mail: <input type="text" name="mail"></p>
-    <p>Password: <input type="password" name="password"> Role: <input type="text" name="role"></p>
-    <button >Add User</button>
+    <p>Password: <input type="password" name="password">
+        Role:<select type="text" name="role">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select></p>
+    <button>Add User</button>
 </form>
 
 </body>

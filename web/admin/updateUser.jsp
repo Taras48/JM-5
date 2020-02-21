@@ -18,12 +18,16 @@
 <h3>Update User</h3>
 
 <form method="post" action="/admin/update">
-    <p>Id for delete User: <input type="number" name="testId">
-        NewName: <input type="text" name="newName">
-        NewMail: <input type="text" name="newMail"></p>
-    <p>NewPassword: <input type="password" name="newPassword">
-        NewRole: <input type="text" name="newRole"></p>
-    <button >Update User</button>
+    <p>Id for delete User: <input type="number" name="testId"  disabled value="${param.id}"/>
+        NewName: <input type="text" name="newName" value="${param.name}"/>
+        NewMail: <input type="text" name="newMail"value="${param.mail}" /></p>
+    <p>NewPassword: <input type="password" name="newPassword" value="${param.password}">
+        Role:<select type="text" name="role" >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+    </p>
+    <button>Update User</button>
 </form>
 
 </body>

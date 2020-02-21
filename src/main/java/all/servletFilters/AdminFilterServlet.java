@@ -24,7 +24,7 @@ public class AdminFilterServlet implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }else {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
-            response.sendRedirect("/index");
+            response.sendRedirect("/login");
         }    }
 
     @Override

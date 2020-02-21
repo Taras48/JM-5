@@ -18,7 +18,7 @@
 <h3>Delete User</h3>
 
 <form  method="post" action="/admin/del">
-    <p>Id for delete User: <input type="number" name="id"></p>
+    <p>Id for delete User: <input type="number" name="id" value="${param.id}"></p>
     <button >Delete User</button>
 </form>
 
